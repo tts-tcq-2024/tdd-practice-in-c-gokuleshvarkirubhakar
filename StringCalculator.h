@@ -8,7 +8,7 @@ int add(const char *input_string)
         return 0; // The string is empty
    }
     
-   char *input_string_copy = malloc(strlen(input_string));
+   char *input_string_copy = (char *)malloc(strlen(input_string) + 1);
    if(input_string_copy != NULL)
    {
        strcpy(input_string_copy, input_string);
