@@ -2,15 +2,27 @@
 #include <string.h>
 #include <stdlib.h>
 
+
+int check_num_validity(int num) { 
+    if (num < 0) {
+        printf("Error: Negative number in input: %d\n", num);
+        return 0;
+    }
+    else if (num > 1000) {
+        return 0;
+    }
+    else {
+        return 1;
+    }
+}
+
 int calculate_sum(char *token, char *delimiters) {   
     int num = 0, sum = 0;
     while (token != NULL) {
         num = atoi(token);
-        if (num < 0) {
-            printf("Error: Negative number in input: %d\n", num);
-            return -1; 
-        }
-        if(num <= 1000) sum += num;
+        if(check_num_validity(num)) {
+            sum += num;
+        }       
         token = strtok(NULL, delimiters);
     }
     return sum;
@@ -18,7 +30,7 @@ int calculate_sum(char *token, char *delimiters) {
 
 void check_for_custom_delimiters(char *mod_input, char *delimiters, int *offset) {
     if(strncmp(mod_input, "//", 2) == 0) {
-        delimiters[0] = mod_input[2]; // Replace default delimiter with custom delimiter
+        delimiters[0] = mod_input[2];
         *offset = 4;
     }    
 }
