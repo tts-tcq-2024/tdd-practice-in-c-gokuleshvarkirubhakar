@@ -2,30 +2,39 @@
 #include <string.h>
 #include <stdlib.h>
 
-int add(const char *input_string)
-{
-   if (input_string == NULL || input_string[0] == '\0') {
-        return 0; // The string is empty
-   }
-    
-   char *input_string_copy = (char *)malloc(strlen(input_string) + 1);
-   if(input_string_copy != NULL)
-   {
-       strcpy(input_string_copy, input_string);
-   }
+int validate_inputs(const char* input) {
+    return ((input == NULL || input[0] == '\0'));
+}
 
-   char delimiters[] = ",\n";
-   char *token;
-   int sum = 0;
-   
-   token = strtok(input_string_copy, delimiters);
-    
-    // Walk through other tokens
+char* duplicate_input(const char *input) {
+    char *copy = (char *)malloc(strlen(input) + 1);
+    if(copy != NULL) {
+        strcpy(copy, input);
+    }
+    return copy;
+}
+
+int calculate_sum(char *token, char *delimiters) {   
+    int num = 0, sum = 0;
     while (token != NULL) {
-        int num = atoi(token);
+        num = atoi(token);
         sum += num;
         token = strtok(NULL, delimiters);
+    }   
+    return sum;
+}
+
+int add(const char *input_string) {
+    if(validate_inputs(input_string)) {
+        return 0;
     }
-   
-   return sum; 
+    char delimiters[] = ",\n";
+    char *input_string_copy = duplicate_input(input_string);
+    if (input_string_copy == NULL) {
+        return 0;
+    }   
+    char *token = strtok(input_string_copy, delimiters);
+    int sum = calculate_sum(token, delimiters);
+    free(input_string_copy);
+    return sum; 
 }
