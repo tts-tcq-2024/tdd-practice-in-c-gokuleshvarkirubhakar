@@ -6,6 +6,10 @@ TEST(StringCalculatorAddTests, ExpectZeroForEmptyInput) {
     const char* input = "";
     int result = add(input);
     ASSERT_EQ(result, expectedresult);
+    
+    char* input = NULL;
+    int result = add(input);
+    ASSERT_EQ(result, expectedresult);
 }
 
 TEST(StringCalculatorAddTests, ExpectZeroForSingleZero) {
@@ -42,3 +46,11 @@ TEST(StringCalculatorAddTests, ExpectSumWithCustomDelimiter) {
     int result = add(input);
     ASSERT_EQ(result, expectedresult);
 }
+
+TEST(StringCalculatorAddTests, NegativeNumber) {
+    int expectedresult = -1;
+    const char*  input = "1\n-2,3";
+    int result =add(input);
+    ASSERT_EQ(result, expectedresult);
+}
+
