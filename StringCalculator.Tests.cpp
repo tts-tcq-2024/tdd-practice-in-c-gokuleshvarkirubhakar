@@ -7,8 +7,8 @@ TEST(StringCalculatorAddTests, ExpectZeroForEmptyInput) {
     int result = add(input);
     ASSERT_EQ(result, expectedresult);
     
-    char* input = NULL;
-    int result = add(input);
+    input = NULL;
+    result = add(input);
     ASSERT_EQ(result, expectedresult);
 }
 
