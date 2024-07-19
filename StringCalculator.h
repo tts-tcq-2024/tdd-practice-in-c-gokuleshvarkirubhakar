@@ -6,6 +6,10 @@ int calculate_sum(char *token, char *delimiters) {
     int num = 0, sum = 0;
     while (token != NULL) {
         num = atoi(token);
+        if (num < 0) {
+            printf("Error: Negative number in input: %d\n", num);
+            return -1; 
+        }
         if(num <= 1000) sum += num;
         token = strtok(NULL, delimiters);
     }
